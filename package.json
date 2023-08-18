@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "wp:initialize": "docker exec -it app-container sh /var/www/bin/initialize.sh"
+    "wp:initialize": "docker exec -it app-container sh /var/www/bin/initialize.sh",
+    "wp:update": "docker exec -it app-container sh /var/www/bin/update.sh"
   },
   "keywords": [],
   "author": "",

@@ -36,4 +36,6 @@ if ! wp core is-installed; then
 
   echo "[WP-CLI] initail setup done."
 
+else
+  echo "[WP-CLI] abort, Wordpress already installed."
 fi
