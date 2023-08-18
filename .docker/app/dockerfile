@@ -1,0 +1,35 @@
+FROM wordpress:php8.1-apache
+
+# custom php.ini
+COPY custom.ini $PHP_INI_DIR/conf.d/
+
+# add mysql module for wp-cli
+RUN apt-get update \
+    && apt-get install mariadb-client -y
+
+# WP-CLI
+RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+RUN chmod +x wp-cli.phar
+RUN mv wp-cli.phar /usr/local/bin/wp
+
+# SETUP SHELL
+COPY initialize.sh /var/www/bin/
+
+# prepare cache directory
+RUN mkdir /var/www/.wp-cli \
+  && chown www-data:www-data /var/www/.wp-cli
+
+# mailhog
+RUN curl --location --output /usr/local/bin/mhsendmail https://github.com/mailhog/mhsendmail/releases/download/v0.2.0/mhsendmail_linux_amd64 && \
+  chmod +x /usr/local/bin/mhsendmail
+RUN echo 'sendmail_path="/usr/local/bin/mhsendmail --smtp-addr=mailhog:1025 --from=admin@example.com"' > /usr/local/etc/php/conf.d/mailhog.ini
+
+# add common user
+# RUN groupadd -g 61000 docker
+# RUN useradd -g 61000 -l -m -s /bin/false -u 61000 docker
+
+# switch user
+USER www-data
+
+# switch to bash
+SHELL ["/bin/bash", "-c"]

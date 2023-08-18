@@ -1,0 +1,89 @@
+services:
+  db:
+    image: mariadb
+    volumes:
+      - db-volume:/var/lib/mysql
+    env_file: ./.docker/.env
+    restart: always
+    ports:
+    - target: 3306
+      host_ip: 127.0.0.1
+      published: "3306"
+      protocol: tcp
+      mode: host
+
+  app:
+    build: .docker/app
+    env_file: .docker/.env
+    depends_on:
+      db:
+        condition: service_started
+        restart: true
+    container_name: app-container
+    ports:
+      - target: 80
+        host_ip: 127.0.0.1
+        published: "8888"
+        protocol: tcp
+        mode: host
+    volumes:
+      - app-volume:/var/www/html
+      - type: bind
+        source: .data/app/wp-includes
+        target: /var/www/html/wp-includes
+        bind:
+          create_host_path: true
+          propagation: slave
+      - type: bind
+        source: .data/app/wp-admin
+        target: /var/www/html/wp-admin
+        bind:
+          create_host_path: true
+          propagation: slave
+      - type: bind
+        source: .data/app/plugins
+        target: /var/www/html/wp-content/plugins
+        bind:
+          create_host_path: true
+          propagation: slave
+      - type: bind
+        source: .docker/app/update.sh
+        target: /var/www/bin/update.sh
+        bind:
+          create_host_path: true
+          propagation: shared
+
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    depends_on:
+      db:
+        condition: service_started
+        restart: true
+    environment:
+      PMA_HOST: db
+    restart: always
+    ports:
+    - target: 80
+      host_ip: 127.0.0.1
+      published: "8081"
+      protocol: tcp
+      mode: host
+
+  mailhog:
+    image: mailhog/mailhog
+    ports:
+      - target: 8025
+        host_ip: 127.0.0.1
+        published: "8025"
+        protocol: tcp
+        mode: host
+      - target: 1025
+        host_ip: 127.0.0.1
+        published: "1025"
+        protocol: tcp
+        mode: host
+
+volumes:
+  db-volume:
+  app-volume:
