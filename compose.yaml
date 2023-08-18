@@ -33,13 +33,26 @@ services:
         target: /var/www/html/wp-includes
         bind:
           create_host_path: true
-          propagation: shared
+          propagation: slave
       - type: bind
         source: .data/app/wp-admin
         target: /var/www/html/wp-admin
         bind:
           create_host_path: true
+          propagation: slave
+      - type: bind
+        source: .data/app/plugins
+        target: /var/www/html/wp-content/plugins
+        bind:
+          create_host_path: true
+          propagation: slave
+      - type: bind
+        source: .docker/app/update.sh
+        target: /var/www/bin/update.sh
+        bind:
+          create_host_path: true
           propagation: shared
+
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
