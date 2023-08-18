@@ -1,0 +1,12 @@
+{
+  "name": "docker-wp-vite",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "wp:initialize": "docker exec -it app-container sh /var/www/bin/initialize.sh"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
