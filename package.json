@@ -4,10 +4,17 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "dev" : "vite",
     "wp:initialize": "docker exec -it app-container sh /var/www/bin/initialize.sh",
     "wp:update": "docker exec -it app-container sh /var/www/bin/update.sh"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "volta": {
+    "node": "18.17.1"
+  },
+  "devDependencies": {
+    "vite": "^4.4.9"
+  }
 }
