@@ -1,20 +1,26 @@
 {
   "name": "docker-wp-vite",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Wordpress theme development using vite and docker.",
   "scripts": {
-    "dev" : "vite",
+    "dev": "vite",
+    "build": "vite build",
     "wp:initialize": "docker exec -it app-container sh /var/www/bin/initialize.sh",
     "wp:update": "docker exec -it app-container sh /var/www/bin/update.sh"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "private": true,
   "volta": {
     "node": "18.17.1"
   },
   "devDependencies": {
-    "vite": "^4.4.9"
+    "vite": "^4.4.9",
+    "vite-plugin-live-reload": "^3.0.2",
+    "vite-plugin-static-copy": "^0.17.0"
+  },
+  "dependencies": {
+    "fs": "^0.0.1-security",
+    "glob": "^10.3.3",
+    "path": "^0.12.7",
+    "sass": "^1.66.1"
   }
 }
