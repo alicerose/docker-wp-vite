@@ -13,6 +13,7 @@ import { defineConfig } from 'vite';
 import liveReload from 'vite-plugin-live-reload';
 import { resolve } from 'path';
 import fs from 'fs';
+import autoprefixer from 'autoprefixer';
 
 
 // https://vitejs.dev/config
@@ -26,13 +27,16 @@ export default defineConfig({
     root: process.env.NODE_ENV === '',
     base: '/wp-content/themes/my-theme/',
     publicDir: 'src/templates',
-    
+
     css: {
-        devSourcemap: true  
+        devSourcemap: true,
+        postcss: {
+            plugins: [autoprefixer],
+        }
     },
 
     build: {
-    // output dir for production build
+        // output dir for production build
         outDir: resolve(__dirname, './dist'),
         emptyOutDir: true,
 
@@ -49,11 +53,22 @@ export default defineConfig({
                 admin: resolve(__dirname + '/src/ts/admin.ts')
             },
 
-            // output: {
-            //     entryFileNames: `app.[name].js`,
-            //     chunkFileNames: `vendor.[name].js`,
-            //     assetFileNames: `[name].[ext]`
-            // }
+            output: {
+                entryFileNames: 'assets/js/[name].js',
+                chunkFileNames: 'assets/js/[name].js',
+                assetFileNames: ( { name } ) => {
+                    if ( /\.( gif|jpeg|jpg|png|svg|webp| )$/.test( name ?? '' ) ) {
+                        return 'assets/images/[name].[ext]';
+                    }
+                    if ( /\.css$/.test( name ?? '' ) ) {
+                        return 'assets/css/[name].[ext]';
+                    }
+                    if ( /\.js$/.test( name ?? '' ) ) {
+                        return 'assets/js/[name].[ext]';
+                    }
+                    return 'assets/[name].[ext]';
+                }
+            }
         },
 
         // minifying switch
@@ -77,7 +92,7 @@ export default defineConfig({
         hmr: {
             host: 'localhost',
         },
-    
+
     },
 
     // required for in-browser template compilation

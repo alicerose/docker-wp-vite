@@ -27,6 +27,7 @@
     "vite-plugin-static-copy": "^0.17.0"
   },
   "dependencies": {
+    "autoprefixer": "^10.4.15",
     "fs": "^0.0.1-security",
     "glob": "^10.3.3",
     "path": "^0.12.7",
