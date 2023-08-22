@@ -23,10 +23,11 @@ export default defineConfig({
     ],
 
     // config
-    root: process.env.NODE_ENV === 'development' ? 'src/templates' : '',
+    root: process.env.NODE_ENV === '',
     base: process.env.NODE_ENV === 'development'
         ? '/'
         : '/dist/',
+    publicDir: 'src/templates',
 
     build: {
     // output dir for production build

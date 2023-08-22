@@ -1,3 +1,3 @@
 // main entry point
 // include your assets here
-import '../ts/index.ts';
+import './src/ts/index.ts';

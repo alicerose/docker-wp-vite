@@ -1,1 +1,0 @@
-import '../ts/admin.ts';
