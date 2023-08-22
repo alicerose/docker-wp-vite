@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Vite Loader Utility
  * @url https://github.com/blonestar/wp-theme-vite-tailwind/blob/main/inc/inc.vite.php
@@ -23,7 +22,7 @@ define('DIST_URI', get_template_directory_uri() . '/' . DIST_DEF);
 define('DIST_PATH', get_template_directory() . '/' . DIST_DEF);
 
 // js enqueue settings
-const JS_DEPENDENCY = array(); // array('jquery') as example
+const JS_DEPENDENCY = []; // array('jquery') as example
 const JS_LOAD_IN_FOOTER = true; // load scripts in footer?
 
 // default server address, port and entry point can be customized in vite.config.json
@@ -48,7 +47,11 @@ add_action( 'wp_enqueue_scripts', function() {
         // ----------
 
         // read manifest.json to figure out what to enqueue
-        $manifest = json_decode( file_get_contents( DIST_PATH . '/manifest.json'), true );
+        try {
+            $manifest = json_decode(file_get_contents(DIST_PATH . '/manifest.json'), true, 512, JSON_THROW_ON_ERROR);
+        } catch (JsonException $e) {
+            wp_die($e->getMessage());
+        }
 
         // is ok
         if (is_array($manifest)) {
