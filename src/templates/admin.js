@@ -1,0 +1,1 @@
+import '../ts/admin.ts';

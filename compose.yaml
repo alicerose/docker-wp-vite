@@ -53,7 +53,7 @@ services:
           create_host_path: true
           propagation: shared
       - type: bind
-        source: dist/my-theme
+        source: src/templates
         target: /var/www/html/wp-content/themes/my-theme
         bind:
           create_host_path: true
