@@ -84,7 +84,7 @@ export default defineConfig({
     // https://v3.vuejs.org/guide/installation.html#with-a-bundler
     resolve: {
         alias: {
-            //vue: 'vue/dist/vue.esm-bundler.js'
+            '@/': `${__dirname}/src/`
         }
     }
 });

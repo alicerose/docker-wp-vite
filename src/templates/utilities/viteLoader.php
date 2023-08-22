@@ -47,11 +47,7 @@ add_action( 'wp_enqueue_scripts', function() {
         // ----------
 
         // read manifest.json to figure out what to enqueue
-        try {
-            $manifest = json_decode(file_get_contents(DIST_PATH . '/manifest.json'), true, 512, JSON_THROW_ON_ERROR);
-        } catch (JsonException $e) {
-            wp_die($e->getMessage());
-        }
+        $manifest = json_decode(file_get_contents(DIST_PATH . '/manifest.json'), true, 512);
 
         // is ok
         if (is_array($manifest)) {
