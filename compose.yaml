@@ -58,6 +58,12 @@ services:
         bind:
           create_host_path: true
           propagation: shared
+      - type: bind
+        source: src/assets
+        target: /var/www/html/wp-content/themes/my-theme/assets
+        bind:
+          create_host_path: true
+          propagation: slave
 
 
   phpmyadmin:

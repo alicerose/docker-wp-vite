@@ -6,8 +6,7 @@
     "dev": "vite",
     "build": "vite build",
     "wp:initialize": "docker exec -it app-container sh /var/www/bin/initialize.sh",
-    "wp:update": "docker exec -it app-container sh /var/www/bin/update.sh",
-    "symbolic:set": "sh bin/SymbolicLink.sh"
+    "wp:update": "docker exec -it app-container sh /var/www/bin/update.sh"
   },
   "private": true,
   "volta": {
