@@ -1,10 +1,20 @@
 <?php
 /**
- * テンプレートディレクトリURIのエイリアス
+ * テーマディレクトリURIのエイリアス
  */
-define("TEMPLATE_DIR_URI", get_template_directory_uri());
+define("THEME_URI", get_template_directory_uri());
+
+/**
+ * テーマディレクトリパスのエイリアス
+ */
+define('THEME_PATH', get_template_directory());
 
 /**
  * アセットディレクトリURIのエイリアス
  */
-define('ASSET_DIR_URI', get_template_directory_uri() . '/assets');
+define('ASSET_URI', get_template_directory_uri() . '/assets');
+
+/**
+ * アセットディレクトリパスのエイリアス
+ */
+define('ASSET_PATH', get_template_directory() . '/assets');
