@@ -24,10 +24,12 @@ export default defineConfig({
 
     // config
     root: process.env.NODE_ENV === '',
-    base: process.env.NODE_ENV === 'development'
-        ? '/'
-        : '/dist/',
+    base: '/wp-content/themes/my-theme/',
     publicDir: 'src/templates',
+    
+    css: {
+        devSourcemap: true  
+    },
 
     build: {
     // output dir for production build

@@ -10,7 +10,8 @@
 </head>
 <body>
     <h1>Docker x Vite</h1>
-    <img src='src/assets/images/sample/1.jpeg' alt=''>
+    <img src='<?= get_template_directory_uri() ?>/assets/images/sample/1.jpeg' alt=''>
+<div class='test'></div>
 </body>
 <?php wp_footer(); ?>
 </html>
