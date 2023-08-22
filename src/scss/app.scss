@@ -1,0 +1,10 @@
+.test {
+  width: 100px;
+  height: 100px;
+  margin: 0;
+  border: thin solid #888;
+  background: {
+    image: url('@/assets/images/sample/2.jpeg');
+    size: cover;
+  }
+}

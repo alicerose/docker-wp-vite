@@ -3,3 +3,6 @@
 .env.*
 !.env.example
 .htaccess
+node_modules
+dist
+src/templates/assets
