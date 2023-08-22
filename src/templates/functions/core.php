@@ -1,11 +1,11 @@
 <?php
-/**
- * WordPressのコア設定
- * @update 2023.08.22
- */
+/*----------------------------------------------------------------------------------
+    WordPressのコア設定
+    @update 2023.08.22
+-----------------------------------------------------------------------------------*/
 
 /**
- * headタグ内の不要項目削除
+ * headタグ・レスポンスヘッダ内の不要項目削除
  */
 function removeUnnecessaryHeader(): void
 {
@@ -30,6 +30,9 @@ function removeUnnecessaryHeader(): void
 
     // WP-JSONリンクの削除
     remove_action( 'wp_head','rest_output_link_wp_head');
+
+    // Link削除
+    remove_action('template_redirect', 'rest_output_link_header', 11);
 }
 add_action( 'init', 'removeUnnecessaryHeader' );
 
