@@ -3,4 +3,4 @@
  * VITE開発環境かどうか
  * @todo 環境変数に置き換える
  */
-const IS_VITE_DEVELOPMENT = true;
+define("IS_VITE_DEVELOPMENT", $_SERVER['WP_DEBUG'] ?? WP_DEBUG ?? false);
