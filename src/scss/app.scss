@@ -8,3 +8,12 @@
 // components
 @use 'objects/components/debugger';
 @use 'objects/components/pagination';
+
+.test {
+  width: 100px;
+  aspect-ratio: 1 / 1;
+  background: {
+    image: url('@/assets/images/sample.png.webp');
+    size: cover;
+  }
+}

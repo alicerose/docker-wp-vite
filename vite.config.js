@@ -95,8 +95,6 @@ export default defineConfig({
 
     },
 
-    // required for in-browser template compilation
-    // https://v3.vuejs.org/guide/installation.html#with-a-bundler
     resolve: {
         alias: {
             '@/': `${__dirname}/src/`
