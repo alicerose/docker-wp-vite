@@ -1,0 +1,14 @@
+@use 'global' as g;
+
+// --------------------------------
+// サイト全体の基底設定
+// --------------------------------
+
+html, body {
+  color: g.$colors-text;
+  font: {
+    family: g.$font-serif;
+    size: g.minvw(32,16);
+  }
+}
+

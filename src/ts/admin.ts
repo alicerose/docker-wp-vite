@@ -1,3 +1,3 @@
-import '../scss/admin.scss';
+import '@/scss/admin.scss';
 
-console.log('admin');
+console.log('admin script');
