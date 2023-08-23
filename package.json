@@ -4,7 +4,15 @@
   "description": "Wordpress theme development using vite and docker.",
   "scripts": {
     "dev": "vite",
-    "build": "vite build && sh bin/copy-build-assets.sh",
+    "build:develop": "NODE_ENV=develop vite build && sh bin/copy-build-assets.sh",
+    "build:production": "NODE_ENV=production vite build && sh bin/copy-build-assets.sh",
+    "docker:up": "docker compose up -d",
+    "docker:down": "docker compose down",
+    "docker:build": "docker compose build --no-cache",
+    "convert-webp": "sh bin/convert-webp.sh",
+    "deploy:develop": "sh bin/deploy.sh develop",
+    "archiver": "sh bin/archiver.sh production",
+    "error_log": "tail -f .data/log/error.log",
     "wp:initialize": "docker exec -it app-container sh /var/www/bin/initialize.sh",
     "wp:update": "docker exec -it app-container sh /var/www/bin/update.sh"
   },

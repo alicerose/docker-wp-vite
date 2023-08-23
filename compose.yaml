@@ -29,6 +29,12 @@ services:
     volumes:
       - app-volume:/var/www/html
       - type: bind
+        source: .data/log
+        target: /var/log/apache2
+        bind:
+          create_host_path: true
+          propagation: slave
+      - type: bind
         source: .data/app/wp-includes
         target: /var/www/html/wp-includes
         bind:
