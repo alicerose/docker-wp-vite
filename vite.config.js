@@ -49,7 +49,7 @@ export default defineConfig({
         // our entry
         rollupOptions: {
             input: {
-                main: resolve( __dirname + '/src/ts/index.ts'),
+                app: resolve( __dirname + '/src/ts/app.ts'),
                 admin: resolve(__dirname + '/src/ts/admin.ts')
             },
 
