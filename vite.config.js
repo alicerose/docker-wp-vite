@@ -15,7 +15,6 @@ import { resolve } from 'path';
 import fs from 'fs';
 import autoprefixer from 'autoprefixer';
 
-
 // https://vitejs.dev/config
 export default defineConfig({
 
@@ -24,7 +23,7 @@ export default defineConfig({
     ],
 
     // config
-    root: process.env.NODE_ENV === '',
+    root: '',
     base: '/wp-content/themes/my-theme/',
     publicDir: 'src/templates',
 
