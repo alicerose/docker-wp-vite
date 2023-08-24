@@ -50,10 +50,11 @@ function insertAdminViteModuleHook(): void
 }
 
 /**
- * Vite環境で生成したアセット類の読み込み
+ * 環境に応じたアセットファイルの参照コード挿入
+ * @param bool $isAdmin
  * @return void
  */
-function applyViteAssets(): void
+function switchInsertViteAssets(bool $isAdmin = false): void
 {
     // Vite環境ならエントリポイントを挿入
     if (defined('IS_VITE_DEVELOPMENT') && IS_VITE_DEVELOPMENT === true) {
@@ -73,29 +74,35 @@ function applyViteAssets(): void
 
             foreach($manifest as $key => $array) {
 
+                error_log($key);
+
+                $file_key = str_replace('src/ts', '', $key);
+
                 if(!$array["isEntry"]) {
                     continue;
                 }
 
+                error_log('handle:' . is_admin() ? 'admin' : 'front');
+
                 // for admin
-                if(str_contains("admin", $key)) {
+                if($isAdmin && str_contains("admin", $key)) {
                     if(isset($array["css"])) {
                         foreach($array["css"] as $i => $css) {
-                            wp_enqueue_style( 'admin-style-' . $i, DIST_URI . '/' . $css );
+                            wp_enqueue_style( $file_key . '-' . $i, DIST_URI . $css );
                         }
                     }
-                    wp_enqueue_script( 'admin-script', DIST_URI . '/' . $array["file"], JS_DEPENDENCY, '', JS_LOAD_IN_FOOTER );
-                } else {
+                    wp_enqueue_script( 'admin-script', DIST_URI . $array["file"], JS_DEPENDENCY, '', JS_LOAD_IN_FOOTER );
+                }
 
+                if(!$isAdmin) {
                     // for frontend
                     if(isset($array["css"])) {
                         foreach($array["css"] as $i => $css) {
-                            wp_enqueue_style( 'app-style-' . $i, DIST_URI . '/' . $css );
+                            wp_enqueue_style( 'app-style-' . $i, DIST_URI . $css );
                         }
                     }
 
-                    wp_enqueue_script( 'app-script', DIST_URI . '/' . $array["file"], JS_DEPENDENCY, '', JS_LOAD_IN_FOOTER );
-
+                    wp_enqueue_script( $file_key, DIST_URI . $array["file"], JS_DEPENDENCY, '', JS_LOAD_IN_FOOTER );
                 }
 
             }
@@ -106,8 +113,25 @@ function applyViteAssets(): void
     }
 }
 
+/**
+ * Vite環境で生成したアセット類読み込みのクッション関数
+ */
+function applyViteAssets(): void
+{
+    switchInsertViteAssets();
+}
+
+/**
+ * Vite環境で生成したアセット類読み込みのクッション関数（管理画面）
+ * @return void
+ */
+function applyAdminViteAssets(): void
+{
+    switchInsertViteAssets();
+}
+
 // フロントへの適用
 add_action( 'wp_enqueue_scripts', 'applyViteAssets');
 
 // 管理画面への適用
-add_action( 'admin_enqueue_scripts', 'applyViteAssets');
+add_action( 'admin_enqueue_scripts', 'applyAdminViteAssets');
