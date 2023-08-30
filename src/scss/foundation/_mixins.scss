@@ -1,0 +1,98 @@
+// --------------------------------
+// 独自mixins
+// --------------------------------
+@use 'variables' as var;
+
+// メディアクエリ
+// 第一引数省略時
+//   ブレイクポイント変数
+// 第二引数省略時の挙動
+//   max-width
+// 第一引数にmin
+//   min-width
+//   第二引数がminの場合、第一引数に+1される
+// コンパイルサンプル
+//   @include mq {}           // @media screen and (max-width: 768px) {}
+//   @include mq(min) {}      // @media screen and (min-width: 769px) {}
+//   @include mq(min, 1000){} // @media screen and (min-width: 1001px) {}
+@mixin mq($method: max, $width: var.$breakpoint) {
+  @if ($method == min) {
+    $width: $width + 1;
+  }
+  @media screen and (#{$method}-width: #{$width}px) {
+    @content;
+  }
+}
+
+// csshack
+@mixin ie11 {
+  @media all and (-ms-high-contrast: none\0) {
+    @content;
+  }
+}
+@mixin edge {
+  @supports (-ms-ime-align: auto) {
+    @content;
+  }
+}
+
+// placeholder
+@mixin placeholder {
+  &:placeholder-shown {
+    @content;
+  }
+  &::-webkit-input-placeholder {
+    @content;
+  }
+  &:-moz-placeholder {
+    opacity: 1;
+    @content;
+  }
+  &::-moz-placeholder {
+    opacity: 1;
+    @content;
+  }
+  &:-ms-input-placeholder {
+    @content;
+  }
+}
+
+// hover
+@mixin hover($method: opacity, $value: 0.7) {
+  #{$method}: 1;
+  transition: #{$method} 300ms ease;
+  backface-visibility: hidden;
+  &:hover {
+    @include mq(min) {
+      #{$method}: $value;
+      @content;
+    }
+  }
+}
+
+// reset form
+// @include formReset(select)でセレクトボックス用
+@mixin formReset($property: input) {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: none;
+  border-radius: 0;
+  outline: none;
+  background: transparent;
+  padding: 0;
+  @if ($property == select) {
+    &::-ms-expand {
+      display: none;
+    }
+  }
+}
+
+// objectFit
+// IE11でpolyfill(https://github.com/fregante/object-fit-images) を使うときのことを考えてmixin化
+@mixin objectFit($method: contain) {
+  object-fit: $method;
+  object-position: center;
+  font-family: 'object-fit: #{$method};';
+  @content;
+}

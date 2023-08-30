@@ -1,8 +1,12 @@
 .data
 .idea
+.env
 .env.*
 !.env.example
+!.docker/.env
 .htaccess
 node_modules
 dist
 src/templates/assets
+src/templates/src
+src/templates/.version

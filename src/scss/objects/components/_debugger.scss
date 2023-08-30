@@ -1,0 +1,18 @@
+@use '../../foundation/global' as g;
+
+.var_dump {
+  z-index: g.z(debugger);
+  padding: 2em;
+  position: fixed;
+  width: 80vw;
+  height: 80vh;
+  left: 10vw;
+  top: 10vh;
+  overflow-y: auto;
+  background: {
+    color: rgba(#eee, 0.8);
+  }
+  font: {
+    size: 12px;
+  }
+}

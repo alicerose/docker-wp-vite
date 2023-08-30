@@ -15,7 +15,6 @@ import { resolve } from 'path';
 import fs from 'fs';
 import autoprefixer from 'autoprefixer';
 
-
 // https://vitejs.dev/config
 export default defineConfig({
 
@@ -24,7 +23,7 @@ export default defineConfig({
     ],
 
     // config
-    root: process.env.NODE_ENV === '',
+    root: '',
     base: '/wp-content/themes/my-theme/',
     publicDir: 'src/templates',
 
@@ -49,7 +48,7 @@ export default defineConfig({
         // our entry
         rollupOptions: {
             input: {
-                main: resolve( __dirname + '/src/ts/index.ts'),
+                app: resolve( __dirname + '/src/ts/app.ts'),
                 admin: resolve(__dirname + '/src/ts/admin.ts')
             },
 
@@ -95,8 +94,6 @@ export default defineConfig({
 
     },
 
-    // required for in-browser template compilation
-    // https://v3.vuejs.org/guide/installation.html#with-a-bundler
     resolve: {
         alias: {
             '@/': `${__dirname}/src/`

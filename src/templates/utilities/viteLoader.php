@@ -1,77 +1,73 @@
 <?php
-/**
- * Vite Loader Utility
- * @url https://github.com/blonestar/wp-theme-vite-tailwind/blob/main/inc/inc.vite.php
- */
 
-// Exit if accessed directly
-if ( ! defined( 'ABSPATH' ) )
-    exit;
+$configs = [
+    "host" => "http://localhost:3000",
+    "entry" => [
+        "front" => "/main.js",
+        "admin" => "/admin.js"
+    ],
+];
+define("VITE_CONFIG", $configs);
 
-/*
- * VITE & Tailwind JIT development
- * Inspired by https://github.com/andrefelipe/vite-php-setup
- *
- */
+function insertFrontModuleHook(): void
+{
+    echo '<script type="module" crossorigin src="' . VITE_CONFIG["host"] . VITE_CONFIG["entry"]["front"] . '"></script>';
+}
 
-// dist subfolder - defined in vite.config.json
-const DIST_DEF = 'dist';
+function insertAdminModuleHook() {
+    echo '<script type="module" crossorigin src="' . VITE_CONFIG["host"] . VITE_CONFIG["entry"]["admin"] . '"></script>';
+}
 
-// defining some base urls and paths
-define('DIST_URI', get_template_directory_uri() . '/' . DIST_DEF);
-define('DIST_PATH', get_template_directory() . '/' . DIST_DEF);
+function loadViteAssets(): void
+{
+    // vite環境の場合
+    if(defined('IS_VITE_DEVELOPMENT') && IS_VITE_DEVELOPMENT) {
 
-// js enqueue settings
-const JS_DEPENDENCY = []; // array('jquery') as example
-const JS_LOAD_IN_FOOTER = true; // load scripts in footer?
+        // フロント
+        add_action('wp_head', 'insertFrontModuleHook');
 
-// default server address, port and entry point can be customized in vite.config.json
-const VITE_SERVER = 'http://localhost:3000';
-define("VITE_ENTRY_POINT", is_admin() ? '/admin.js' : '/main.js');
+        // 管理画面
+        add_action('admin_print_scripts', 'insertAdminModuleHook');
 
-// enqueue hook
-add_action( 'wp_enqueue_scripts', function() {
-
-    if (defined('IS_VITE_DEVELOPMENT') && IS_VITE_DEVELOPMENT === true) {
-
-        // insert hmr into head for live reload
-        function vite_head_module_hook() {
-            echo '<script type="module" crossorigin src="' . VITE_SERVER . VITE_ENTRY_POINT . '"></script>';
-        }
-
-        add_action('wp_head', 'vite_head_module_hook');
-
-    } else {
-
-        // production version, 'npm run build' must be executed in order to generate assets
-        // ----------
-
-        // read manifest.json to figure out what to enqueue
-        $manifest = json_decode(file_get_contents(DIST_PATH . '/manifest.json'), true, 512);
-
-        // is ok
-        if (is_array($manifest)) {
-
-            // get first key, by default is 'main.js' but it can change
-            $manifest_key = array_keys($manifest);
-            if (isset($manifest_key[0])) {
-
-                // enqueue CSS files
-                foreach(@$manifest[$manifest_key[0]]['css'] as $css_file) {
-                    wp_enqueue_style( 'main', DIST_URI . '/' . $css_file );
-                }
-
-                // enqueue main JS file
-                $js_file = @$manifest[$manifest_key[0]]['file'];
-                if ( ! empty($js_file)) {
-                    wp_enqueue_script( 'main', DIST_URI . '/' . $js_file, JS_DEPENDENCY, '', JS_LOAD_IN_FOOTER );
-                }
-
-            }
-
-        }
-
+        return;
     }
 
+    $isAdmin = mb_strpos($_SERVER['REQUEST_URI'], 'wp-admin') !== false;
+    if($isAdmin) {
+        echo "admin page";
+    }
 
-});
+    // ビルド済み環境の場合
+    $manifestPath = get_template_directory() . '/manifest.json';
+    $raw = file_get_contents($manifestPath);
+    try {
+        $manifest = json_decode($raw, true, 512, JSON_THROW_ON_ERROR);
+        foreach($manifest as $key => $array) {
+            $file_key = str_replace('src/ts', '', $key);
+
+            if(!$array["isEntry"]) {
+                continue;
+            }
+
+            // 管理画面＋admin.tsを含まない or 非管理画面+admin.tsを含む場合スキップする
+            if(
+                ($isAdmin && mb_strpos($file_key, "admin") === false)
+                || (!$isAdmin && mb_strpos($file_key, "admin") !== false)
+            ) {
+                continue;
+            }
+
+            if(isset($array["css"])) {
+                foreach($array["css"] as $i => $css) {
+                    wp_enqueue_style( $file_key . '-' . $i, THEME_URI . '/' . $css , '', '');
+                }
+            }
+            wp_enqueue_script( $file_key, THEME_URI . '/' . $array["file"], [], '', true );
+        }
+
+    } catch (JsonException $e) {
+        wp_die($e->getMessage());
+    }
+}
+
+add_action( 'init', 'loadViteAssets');

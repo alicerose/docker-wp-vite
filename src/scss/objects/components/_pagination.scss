@@ -1,0 +1,48 @@
+@use '../../foundation/global' as g;
+
+.pagination {
+  display: flex;
+  justify-content: center;
+}
+
+.pager__wrapper {
+  display: flex;
+  align-items: center;
+  list-style-type: none;
+  margin: 1em 0;
+  padding: 0;
+}
+
+.pager__container {
+  display: block;
+  width: 2em;
+  aspect-ratio: 1 / 1;
+  border: {
+    style: solid;
+    width: 1px;
+    color: #ccc;
+  }
+}
+
+.pager__link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  text-decoration: none;
+
+  &[data-disabled] {
+    background: {
+      color: #aaa;
+    }
+    pointer-events: none;
+    opacity: 0.3;
+  }
+
+  &[data-current] {
+    font: {
+      weight: g.$font-bold;
+    }
+  }
+}
