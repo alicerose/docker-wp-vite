@@ -7,9 +7,8 @@ services:
     restart: always
     ports:
     - target: 3306
-      host_ip: 127.0.0.1
+      host_ip: 0.0.0.0
       published: "3306"
-      protocol: tcp
       mode: host
 
   app:
@@ -22,9 +21,8 @@ services:
     container_name: app-container
     ports:
       - target: 80
-        host_ip: 127.0.0.1
+        host_ip: 0.0.0.0
         published: "8888"
-        protocol: tcp
         mode: host
     volumes:
       - app-volume:/var/www/html
@@ -90,23 +88,20 @@ services:
     restart: always
     ports:
     - target: 80
-      host_ip: 127.0.0.1
+      host_ip: 0.0.0.0
       published: "8081"
-      protocol: tcp
       mode: host
 
   mailhog:
     image: jcalonso/mailhog
     ports:
       - target: 8025
-        host_ip: 127.0.0.1
+        host_ip: 0.0.0.0
         published: "8025"
-        protocol: tcp
         mode: host
       - target: 1025
-        host_ip: 127.0.0.1
+        host_ip: 0.0.0.0
         published: "1025"
-        protocol: tcp
         mode: host
 
 volumes:
