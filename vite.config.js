@@ -15,6 +15,7 @@ import { resolve } from 'path';
 import fs from 'fs';
 import autoprefixer from 'autoprefixer';
 import VitePluginBrowserSync from 'vite-plugin-browser-sync';
+import ip from "ip";
 
 // https://vitejs.dev/config
 export default defineConfig({
@@ -24,12 +25,9 @@ export default defineConfig({
         VitePluginBrowserSync({
             bs: {
                 proxy: 'http://localhost:8888',
+                ws: true,
                 open: 'external',
-                ghostMode: {
-                    clicks: true,
-                    forms: true,
-                    scroll: true
-                }
+                ghostMode: true
             }
         })
     ],
@@ -101,7 +99,7 @@ export default defineConfig({
         https: false,
 
         hmr: {
-            host: 'localhost',
+            host: ip.address(),
         },
 
     },
