@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Wordpress theme development using vite and docker.",
   "scripts": {
-    "dev": "vite --host",
+    "dev": "sh bin/set-private-ip.sh && vite --host",
     "build:develop": "NODE_ENV=develop vite build && npm run copy:assets",
     "build:production": "NODE_ENV=production vite build && npm run copy:assets",
     "docker:up": "docker compose up -d",
