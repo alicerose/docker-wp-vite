@@ -80,7 +80,7 @@ services:
 
 
   phpmyadmin:
-    image: phpmyadmin/phpmyadmin
+    image: arm64v8/phpmyadmin
     depends_on:
       db:
         condition: service_started
@@ -96,7 +96,7 @@ services:
       mode: host
 
   mailhog:
-    image: mailhog/mailhog
+    image: jcalonso/mailhog
     ports:
       - target: 8025
         host_ip: 127.0.0.1
