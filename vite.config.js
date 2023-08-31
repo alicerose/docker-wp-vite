@@ -14,12 +14,24 @@ import liveReload from 'vite-plugin-live-reload';
 import { resolve } from 'path';
 import fs from 'fs';
 import autoprefixer from 'autoprefixer';
+import VitePluginBrowserSync from 'vite-plugin-browser-sync';
 
 // https://vitejs.dev/config
 export default defineConfig({
 
     plugins: [
-        liveReload(__dirname +'/src/templates/**/*.php')
+        liveReload(__dirname +'/src/templates/**/*.php'),
+        VitePluginBrowserSync({
+            bs: {
+                proxy: 'http://localhost:8888',
+                open: 'external',
+                ghostMode: {
+                    clicks: true,
+                    forms: true,
+                    scroll: true
+                }
+            }
+        })
     ],
 
     // config

@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Wordpress theme development using vite and docker.",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --host",
     "build:develop": "NODE_ENV=develop vite build && npm run copy:assets",
     "build:production": "NODE_ENV=production vite build && npm run copy:assets",
     "docker:up": "docker compose up -d",
@@ -33,6 +33,7 @@
     "prettier-eslint": "^15.0.1",
     "stylelint": "^15.10.3",
     "vite": "^4.4.9",
+    "vite-plugin-browser-sync": "^1.0.6",
     "vite-plugin-live-reload": "^3.0.2",
     "vite-plugin-static-copy": "^0.17.0"
   },
