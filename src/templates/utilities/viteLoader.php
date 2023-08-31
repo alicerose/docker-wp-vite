@@ -1,7 +1,7 @@
 <?php
 
 $configs = [
-    "port" => 3000,
+    "port" => 3333,
     "entry" => [
         "front" => "/main.js",
         "admin" => "/admin.js"

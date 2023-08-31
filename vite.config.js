@@ -95,7 +95,7 @@ export default defineConfig({
         // we need a strict port to match on PHP side
         // change freely, but update in your functions.php to match the same port
         strictPort: true,
-        port: 3000,
+        port: 3333,
 
         // serve over http
         https: false,
