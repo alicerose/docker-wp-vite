@@ -22,7 +22,7 @@
 
 | ホスト                   | コンテナ       | 詳細・備考                                                              |
 |:----------------------|:-----------|:-------------------------------------------------------------------|
-| http://localhost:8080 | Apache     | PHP 8.1                                                            |
+| http://localhost:8888 | Apache     | PHP 8.1                                                            |
 | http://localhost:3306 | MariaDB    | Volume化                                                            |
 | http://localhost:8081 | PhpMyAdmin |                                                                    |
 | http://localhost:8025 | MailHog    | WordPressから配信されたメールをインターセプトする<br>永続化されていないのでコンテナを落とすと受信済みデータは消去される |
@@ -53,6 +53,7 @@
 
 * `docker compose up -d`
 * （初回のみ）`npm run wp:initialize`
+* `src/templates`配下が消滅するので
 * プラグインの導入等を`npm run wp:update`で実施
 * `npm run dev`
 * `http://localhost:8888`へ

@@ -1,12 +1,20 @@
 <?php
 
 $configs = [
-    "host" => "http://localhost:3000",
+    "port" => 3333,
     "entry" => [
         "front" => "/main.js",
         "admin" => "/admin.js"
     ],
 ];
+
+$path = THEME_PATH . '/.hostip';
+if(file_exists($path)) {
+    $file = file_get_contents($path);
+    $configs["host"] = "http://" . $file . ":" . $configs["port"];
+} else {
+    $configs["host"] = null;
+}
 define("VITE_CONFIG", $configs);
 
 function insertFrontModuleHook(): void

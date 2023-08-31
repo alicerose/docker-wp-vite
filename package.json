@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Wordpress theme development using vite and docker.",
   "scripts": {
-    "dev": "vite",
+    "dev": "sh bin/set-private-ip.sh && vite --host",
     "build:develop": "NODE_ENV=develop vite build && npm run copy:assets",
     "build:production": "NODE_ENV=production vite build && npm run copy:assets",
     "docker:up": "docker compose up -d",
@@ -28,11 +28,13 @@
     "eslint": "^8.47.0",
     "eslint-config-prettier": "^9.0.0",
     "husky": "^8.0.3",
+    "ip": "^1.1.8",
     "lint-staged": "^14.0.0",
     "prettier": "^3.0.2",
     "prettier-eslint": "^15.0.1",
     "stylelint": "^15.10.3",
     "vite": "^4.4.9",
+    "vite-plugin-browser-sync": "^1.0.6",
     "vite-plugin-live-reload": "^3.0.2",
     "vite-plugin-static-copy": "^0.17.0"
   },

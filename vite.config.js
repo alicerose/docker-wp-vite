@@ -14,12 +14,22 @@ import liveReload from 'vite-plugin-live-reload';
 import { resolve } from 'path';
 import fs from 'fs';
 import autoprefixer from 'autoprefixer';
+import VitePluginBrowserSync from 'vite-plugin-browser-sync';
+import ip from "ip";
 
 // https://vitejs.dev/config
 export default defineConfig({
 
     plugins: [
-        liveReload(__dirname +'/src/templates/**/*.php')
+        liveReload(__dirname +'/src/templates/**/*.php'),
+        VitePluginBrowserSync({
+            bs: {
+                proxy: 'http://localhost:8888',
+                ws: true,
+                open: 'external',
+                ghostMode: true
+            }
+        })
     ],
 
     // config
@@ -83,13 +93,13 @@ export default defineConfig({
         // we need a strict port to match on PHP side
         // change freely, but update in your functions.php to match the same port
         strictPort: true,
-        port: 3000,
+        port: 3333,
 
         // serve over http
         https: false,
 
         hmr: {
-            host: 'localhost',
+            host: ip.address(),
         },
 
     },

@@ -10,3 +10,5 @@ dist
 src/templates/assets
 src/templates/src
 src/templates/.version
+src/templates/.hostip
+bin/.DS_Store
