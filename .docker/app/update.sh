@@ -4,8 +4,12 @@ echo "[WP-CLI] Exec update commands."
 
 if wp core is-installed; then
 
-  # プラグインの追加
+  # テーマ切り替え
+  echo "[WP-CLI] Switch themes."
+  wp theme activate "${WP_THEME}"
 
+  # プラグインの追加
+  echo "[WP-CLI] Add plugins."
   wp plugin install \
     advanced-custom-fields \
     all-in-one-wp-migration \
@@ -18,7 +22,7 @@ if wp core is-installed; then
     --activate
 
   # 翻訳データ更新
-
+  echo "[WP-CLI] Update translations."
   wp language plugin update --all
 else
   echo "[WP-CLI] No wordpress installed."
