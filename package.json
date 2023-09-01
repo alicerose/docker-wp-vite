@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Wordpress theme development using vite and docker.",
   "scripts": {
-    "dev": "sh bin/set-private-ip.sh && vite --host",
+    "dev": "npm run version && npm run ip && vite --host",
     "build:develop": "NODE_ENV=develop vite build && npm run copy:assets",
     "build:production": "NODE_ENV=production vite build && npm run copy:assets",
     "docker:up": "docker compose up -d",
@@ -17,8 +17,9 @@
     "prettier:precommit": "prettier -l 'src/**/*.{js,jsx,ts,tsx,json,css,scss}",
     "wp:initialize": "docker exec -it app-container sh /var/www/bin/initialize.sh",
     "wp:update": "docker exec -it app-container sh /var/www/bin/update.sh",
+    "copy:assets": "sh bin/copy-build-assets.sh",
     "version": "sh bin/version.sh",
-    "copy:assets": "sh bin/copy-build-assets.sh"
+    "ip": "sh bin/set-private-ip.sh"
   },
   "husky": {
     "hooks": {
