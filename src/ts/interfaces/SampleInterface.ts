@@ -1,3 +1,3 @@
-export default interface SampleInterface {
+export interface SampleInterface {
   [key: string]: number;
 }

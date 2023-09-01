@@ -26,18 +26,18 @@ export class WordPressInfoClass {
         this.template = null;
 
         this.type = {
-            home    : false,
-            archive : false,
-            tag     : false,
-            category: false,
-            page    : false,
-            error404: false,
+            home     : false,
+            archive  : false,
+            tag      : false,
+            category : false,
+            page     : false,
+            error404 : false,
         };
 
         this.state = {
-            logged_in: false,
-            admin_bar: false,
-            paged    : false,
+            logged_in : false,
+            admin_bar : false,
+            paged     : false,
         };
 
         this.defineTypes();
@@ -48,37 +48,37 @@ export class WordPressInfoClass {
     private defineTypes() {
         for(const cls of this.classList) {
             switch(cls) {
-                case 'home':
-                    this.type.home = true;
-                    break;
-                case 'single':
-                    this.type.single = true;
-                    break;
-                case 'archive':
-                    this.type.archive = true;
-                    break;
-                case 'category':
-                    this.type.category = true;
-                    break;
-                case 'tag':
-                    this.type.tag = true;
-                    break;
-                case 'page':
-                    this.type.page = true;
-                    break;
-                case 'error404':
-                    this.type.error404 = true;
-                    break;
+            case 'home':
+                this.type.home = true;
+                break;
+            case 'single':
+                this.type.single = true;
+                break;
+            case 'archive':
+                this.type.archive = true;
+                break;
+            case 'category':
+                this.type.category = true;
+                break;
+            case 'tag':
+                this.type.tag = true;
+                break;
+            case 'page':
+                this.type.page = true;
+                break;
+            case 'error404':
+                this.type.error404 = true;
+                break;
 
-                case 'paged':
-                    this.state.paged = true;
-                    break;
-                case 'logged-in':
-                    this.state.logged_in = true;
-                    break;
-                case 'admin-bar':
-                    this.state.admin_bar = true;
-                    break;
+            case 'paged':
+                this.state.paged = true;
+                break;
+            case 'logged-in':
+                this.state.logged_in = true;
+                break;
+            case 'admin-bar':
+                this.state.admin_bar = true;
+                break;
             }
 
             this.defineId(cls);

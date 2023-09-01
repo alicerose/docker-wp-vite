@@ -4,6 +4,6 @@ export default class SampleClass implements SampleInterface {
   [key: string]: number;
 
   constructor(num1: number) {
-    this.num1 = num1;
+      this.num1 = num1;
   }
 }

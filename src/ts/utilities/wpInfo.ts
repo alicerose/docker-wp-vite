@@ -1,5 +1,5 @@
 import { WordPressInfoClass } from '../models/WordPressInfoClass';
-import WpInfoInterface from '../interfaces/WpInfoInterface';
+import {WpInfoInterface} from '../interfaces/WpInfoInterface';
 
 export const WpInfo:WpInfoInterface = {
     info: null,
@@ -7,6 +7,8 @@ export const WpInfo:WpInfoInterface = {
     init() {
         const body = document.querySelector('body');
         if(body) this.info = new WordPressInfoClass(Array.from(body.classList));
+
+        return 'Wordpress initialized.';
     },
     get() {
         return this.info;

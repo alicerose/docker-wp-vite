@@ -13,8 +13,9 @@
     "deploy:develop": "npm run version && sh bin/deploy.sh develop",
     "archiver": "sh bin/archiver.sh production",
     "error_log": "tail -f .data/log/error.log",
-    "lint:precommit": "eslint 'src/ts/**/*.{ts,tsx}' --max-warnings 0",
-    "prettier:precommit": "prettier -l 'src/**/*.{js,jsx,ts,tsx,json,css,scss}",
+    "lint:ts": "eslint 'src/ts/**/*.{ts,tsx}' --max-warnings 0",
+    "lint:ts:fix": "eslint 'src/ts/**/*.{ts,tsx}' --max-warnings 0 --fix",
+    "prettier": "prettier -l 'src/**/*.{js,jsx,ts,tsx,json,css,scss}'",
     "wp:initialize": "docker exec -it app-container sh /var/www/bin/initialize.sh",
     "wp:update": "docker exec -it app-container sh /var/www/bin/update.sh",
     "copy:assets": "sh bin/copy-build-assets.sh",
@@ -27,8 +28,7 @@
     }
   },
   "lint-staged": {
-    "src/ts/**/*.{ts,tsx}": "npm run lint:precommit",
-    "src/**/*.{js,jsx,ts,tsx,json,css,scss}": "npm run prettier:precommit"
+    "src/ts/**/*.{ts,tsx}": "npm run lint:ts"
   },
   "private": true,
   "volta": {
