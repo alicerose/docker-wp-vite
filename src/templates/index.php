@@ -3,7 +3,7 @@
     <img src='<?= get_template_directory_uri() ?>/assets/images/sample.png' alt=''>
     <div class='test'></div>
 
-    <?php ImageLoader('/sample.png'); ?>
+    <?php ImageLoader('/dummy.png'); ?>
     <?php ImageLoader('/sample.png', '', 'example', false, true); ?>
 </main>
 <?php
