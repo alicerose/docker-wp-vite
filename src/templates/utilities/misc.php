@@ -32,15 +32,19 @@ function debugLog(...$messages) {
         return false;
     }
 
-    foreach($messages as $message) {
+    $arr = [];
+
+    foreach($messages as $i => $message) {
         $type = gettype($message);
 
         if($type === "string" || $type === "integer") {
-            error_log($message);
+            $arr[] = $message;
         }
 
         if($type === "array" || $type === "object") {
-            error_log(json_encode($message, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
+            $arr[] = json_encode($message, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
         }
     }
+
+    error_log('[DEBUG] ' . implode(", ", $arr));
 }
