@@ -9,11 +9,21 @@
 @use 'objects/components/debugger';
 @use 'objects/components/pagination';
 
+// utilities
+@use 'objects/utilities/imageLoader';
+
 .test {
   width: 100px;
   aspect-ratio: 1 / 1;
   background: {
     image: url('@/assets/images/sample.png.webp');
     size: cover;
+  }
+}
+
+main {
+  padding: 50vw 0;
+  * + * {
+    margin: 30vw 0;
   }
 }

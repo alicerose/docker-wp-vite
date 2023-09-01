@@ -15,7 +15,7 @@ import { resolve } from 'path';
 import fs from 'fs';
 import autoprefixer from 'autoprefixer';
 import VitePluginBrowserSync from 'vite-plugin-browser-sync';
-import ip from "ip";
+import ip from 'ip';
 
 // https://vitejs.dev/config
 export default defineConfig({
@@ -24,30 +24,30 @@ export default defineConfig({
         liveReload(__dirname +'/src/templates/**/*.php'),
         VitePluginBrowserSync({
             bs: {
-                proxy: 'http://localhost:8888',
-                ws: true,
-                open: 'external',
-                ghostMode: true
+                proxy     : 'http://localhost:8888',
+                ws        : true,
+                open      : 'external',
+                ghostMode : true
             }
         })
     ],
 
     // config
-    root: '',
-    base: '/wp-content/themes/my-theme/',
-    publicDir: 'src/templates',
+    root      : '',
+    base      : '/wp-content/themes/my-theme/',
+    publicDir : 'src/templates',
 
     css: {
-        devSourcemap: true,
-        postcss: {
+        devSourcemap : true,
+        postcss      : {
             plugins: [autoprefixer],
         }
     },
 
     build: {
         // output dir for production build
-        outDir: resolve(__dirname, './dist'),
-        emptyOutDir: true,
+        outDir      : resolve(__dirname, './dist'),
+        emptyOutDir : true,
 
         // emit manifest so PHP can find the hashed files
         manifest: true,
@@ -58,14 +58,14 @@ export default defineConfig({
         // our entry
         rollupOptions: {
             input: {
-                app: resolve( __dirname + '/src/ts/app.ts'),
-                admin: resolve(__dirname + '/src/ts/admin.ts')
+                app   : resolve( __dirname + '/src/ts/app.ts'),
+                admin : resolve(__dirname + '/src/ts/admin.ts')
             },
 
             output: {
-                entryFileNames: 'assets/js/[name].js',
-                chunkFileNames: 'assets/js/[name].js',
-                assetFileNames: ( { name } ) => {
+                entryFileNames : 'assets/js/[name].js',
+                chunkFileNames : 'assets/js/[name].js',
+                assetFileNames : ( { name } ) => {
                     if ( /\.( gif|jpeg|jpg|png|svg|webp| )$/.test( name ?? '' ) ) {
                         return 'assets/images/[name].[ext]';
                     }
@@ -81,8 +81,8 @@ export default defineConfig({
         },
 
         // minifying switch
-        minify: process.env.NODE_ENV === 'production',
-        write: true
+        minify : process.env.NODE_ENV === 'production',
+        write  : true
     },
 
     server: {
@@ -92,8 +92,8 @@ export default defineConfig({
 
         // we need a strict port to match on PHP side
         // change freely, but update in your functions.php to match the same port
-        strictPort: true,
-        port: 3333,
+        strictPort : true,
+        port       : 3333,
 
         // serve over http
         https: false,

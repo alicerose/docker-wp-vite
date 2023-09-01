@@ -67,10 +67,10 @@ function loadViteAssets(): void
 
             if(isset($array["css"])) {
                 foreach($array["css"] as $i => $css) {
-                    wp_enqueue_style( $file_key . '-' . $i, THEME_URI . '/' . $css , '', '');
+                    wp_enqueue_style( $file_key . '-' . $i, THEME_URI . '/' . $css , '', getGitHash() ?? '');
                 }
             }
-            wp_enqueue_script( $file_key, THEME_URI . '/' . $array["file"], [], '', true );
+            wp_enqueue_script( $file_key, THEME_URI . '/' . $array["file"], [], getGitHash() ?? '', true );
         }
 
     } catch (JsonException $e) {

@@ -3,6 +3,7 @@ env:
   es2021: true
 extends:
   - eslint:recommended
+  - plugin:@typescript-eslint/eslint-recommended
   - plugin:@typescript-eslint/recommended
   - prettier
 parser: '@typescript-eslint/parser'
@@ -22,5 +23,13 @@ rules:
     - error
     - single
   semi:
+    - error
+    - always
+  key-spacing:
+    - 2
+    - align:
+        beforeColon: true
+        afterColon: true
+  object-curly-spacing:
     - error
     - always

@@ -1,7 +1,7 @@
 import { WordPressInfoClass } from '../models/WordPressInfoClass';
 
-export default interface WpInfoInterface {
+export interface WpInfoInterface {
     info: WordPressInfoClass|null,
-    init(): void,
+    init(): string,
     get(): WordPressInfoClass|null,
-};
+}

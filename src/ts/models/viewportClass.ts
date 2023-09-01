@@ -23,7 +23,8 @@ export class ViewportClass {
      */
     private watch() {
         let timer = 0;
-        window.addEventListener('resize', () => {
+
+        const watcher = () => {
             const isCurrentPC = this.desktop;
             setTimeout(() => {
 
@@ -43,9 +44,11 @@ export class ViewportClass {
                     }
                 });
             });
-        });
-    }
+        };
 
+        window.removeEventListener('resize', watcher);
+        window.addEventListener('resize', watcher);
+    }
 
     /**
      * 画面幅変更時にブレイクポイントを跨いだ時のみ実行する処理を登録する
@@ -93,9 +96,9 @@ export class ViewportClass {
      */
     get screenSize() {
         return {
-            width  : this.width,
-            height : this.height,
-            desktop: this.desktop
+            width   : this.width,
+            height  : this.height,
+            desktop : this.desktop
         };
     }
 

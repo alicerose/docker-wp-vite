@@ -8,7 +8,7 @@
 ### Webpack版との差異
 
 * バンドル環境をWebpackからViteへ刷新
-* localhost:8888でHMRが効くように
+* localhost:3000でHMRが効くように
 * mutagen廃止
 
 ## 対象環境
@@ -51,12 +51,16 @@
 
 ## 開発フロー
 
+* （初回のみ）`npm i`
+* （初回のみ）`husky install`
+* （初回のみ）`husky add .husky/pre-commit "npx lint-staged"`
 * `docker compose up -d`
 * （初回のみ）`npm run wp:initialize`
-* `src/templates`配下が消滅するので
-* プラグインの導入等を`npm run wp:update`で実施
+* プラグインの導入等を都度`npm run wp:update`で実施
 * `npm run dev`
-* `http://localhost:8888`へ
+* `http://xxx.xxx.xxx.xxx:3000`へ
+  * ブラウザで上記ページが自動で開きます
+  * 起動時に端末のプライベートIPが入ります
 
 ### Convert WebP
 
