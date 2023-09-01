@@ -39,3 +39,17 @@ EOT;
  * @memo XXXXXXの状態では未入力と見做して無効化する
  */
 const GTM_TAG_ID = "XXXXXX";
+
+/**
+ * Transient Cache有効期限
+ * @memo 60(s)*60 で1時間のため、末尾の数字で保持時間数を指定
+ */
+const TRANSIENT_CACHE_EXPIRATION = 60 * 60 * 72;
+
+/**
+ * ログイン判定
+ * @memo LOCAL_LOGGED_IN_FLAGを考慮する
+ */
+define("IS_LOGGED_IN", (
+    is_user_logged_in()
+));
