@@ -1,5 +1,5 @@
 import { WordPressInfoClass } from '../models/WordPressInfoClass';
-import {WpInfoInterface} from '../interfaces/WpInfoInterface';
+import { WpInfoInterface } from '../interfaces/WpInfoInterface';
 
 export const WpInfo:WpInfoInterface = {
     info: null,

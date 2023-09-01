@@ -30,3 +30,6 @@ rules:
     - align:
         beforeColon: true
         afterColon: true
+  object-curly-spacing:
+    - error
+    - always

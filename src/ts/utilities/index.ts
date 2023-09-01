@@ -3,6 +3,7 @@ import { AnchorLink } from './anchor';
 import { UserAgent } from './userAgent';
 import { ScrollDetector } from './scrollDetector';
 import { WpInfo } from './wpInfo';
+import { ImageLoader } from './imageLoader';
 
 export const Utilities = {
     init() {
@@ -23,6 +24,7 @@ export const Utilities = {
             // loadで実行するイベント
             console.log(WpInfo.init());
             console.log(WpInfo.get());
+            ImageLoader.init();
         });
 
         const body: HTMLBodyElement = document.getElementsByTagName('body')[0];

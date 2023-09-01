@@ -1,4 +1,4 @@
-import {WpInfo} from '../utilities/wpInfo';
+import { WpInfo } from '../utilities/wpInfo';
 import TestImage from '*.png';
 
 export const SampleScripts =  {
