@@ -17,7 +17,7 @@ if [[ $# == 0 ]]; then
 fi
 
 # アーカイブ名を環境変数から取得
-export $(cat ./.env | grep -v ^# | xargs);
+export $(cat ./.env.${1} | grep -v ^# | xargs);
 
 # アーカイブ名設定がされてなければ中断
 if [[ -z "$ZIP_NAME" ]]; then
