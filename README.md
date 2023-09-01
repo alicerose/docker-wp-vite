@@ -8,7 +8,7 @@
 ### Webpack版との差異
 
 * バンドル環境をWebpackからViteへ刷新
-* localhost:8888でHMRが効くように
+* localhost:3000でHMRが効くように
 * mutagen廃止
 
 ## 対象環境
@@ -58,7 +58,9 @@
 * （初回のみ）`npm run wp:initialize`
 * プラグインの導入等を都度`npm run wp:update`で実施
 * `npm run dev`
-* `http://localhost:8888`へ
+* `http://xxx.xxx.xxx.xxx:3000`へ
+  * ブラウザで上記ページが自動で開きます
+  * 起動時に端末のプライベートIPが入ります
 
 ### Convert WebP
 
