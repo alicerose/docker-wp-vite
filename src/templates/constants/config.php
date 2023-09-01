@@ -20,3 +20,16 @@ const SHOW_GIT_HASH = true;
  * @memo なにか表示するときは文字列を渡す
  */
 const ADMIN_FOOTER_TEXT = "Footer";
+
+/**
+ * ヘッダに挿入する文字列
+ */
+const ADDITIONAL_HEAD_TAG = <<<EOT
+
+EOT;
+
+/**
+ * GTMタグを挿入する場合にIDを指定
+ * @memo XXXXXXの状態では未入力と見做して無効化する
+ */
+const GTM_TAG_ID = "XXXXXX";
