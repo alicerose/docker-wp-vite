@@ -11,6 +11,12 @@ define("IS_VITE_DEVELOPMENT", $_SERVER['WP_DEBUG'] ?? WP_DEBUG ?? false);
 const USE_BLOCK_EDITOR = true;
 
 /**
+ * HTMLタグを圧縮して出力するか
+ * @memo WP_DEBUGがtrueの場合は無視される
+ */
+const ALLOW_HTML_COMPRESSION = true;
+
+/**
  * 管理画面でGitのバージョン表示をするか
  */
 const SHOW_GIT_HASH = true;
