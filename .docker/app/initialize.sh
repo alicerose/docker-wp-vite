@@ -9,7 +9,7 @@ if ! wp core is-installed; then
 
   # === initialize config ===
   wp config create \
-    --path=${WP_PATH} \
+    --path=${WORDPRESS_PATH} \
     --dbname=${WORDPRESS_DB_NAME} \
     --dbuser=${WORDPRESS_DB_USER} \
     --dbpass=${WORDPRESS_DB_PASSWORD} \
@@ -19,11 +19,11 @@ if ! wp core is-installed; then
 
   # === install ===
   wp core install \
-    --url=${WP_URL} \
-    --title=${WP_NAME} \
-    --admin_user=${WP_USER} \
-    --admin_password=${WP_PASS} \
-    --admin_email=${WP_MAIL}
+    --url=${WORDPRESS_URL} \
+    --title=${WORDPRESS_NAME} \
+    --admin_user=${WORDPRESS_USER} \
+    --admin_password=${WORDPRESS_PASS} \
+    --admin_email=${WORDPRESS_MAIL}
 
   # === install and set japanese ===
 

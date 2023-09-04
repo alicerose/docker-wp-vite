@@ -58,19 +58,19 @@ services:
           propagation: shared
       - type: bind
         source: src/templates
-        target: "/var/www/html/wp-content/themes/${WP_THEME}"
+        target: "/var/www/html/wp-content/themes/${WORDPRESS_THEME}"
         bind:
           create_host_path: true
           propagation: shared
       - type: bind
         source: src/assets
-        target: "/var/www/html/wp-content/themes/${WP_THEME}/assets"
+        target: "/var/www/html/wp-content/themes/${WORDPRESS_THEME}/assets"
         bind:
           create_host_path: true
           propagation: slave
       - type: bind
         source: src/assets
-        target: "/var/www/html/wp-content/themes/${WP_THEME}/src/assets"
+        target: "/var/www/html/wp-content/themes/${WORDPRESS_THEME}/src/assets"
         bind:
           create_host_path: true
           propagation: slave

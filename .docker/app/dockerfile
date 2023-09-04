@@ -1,5 +1,8 @@
 FROM wordpress:php8.1-apache
 
+# default env
+ENV WORDPRESS_THEME "my-theme"
+
 # custom php.ini
 COPY custom.ini $PHP_INI_DIR/conf.d/
 
