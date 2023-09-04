@@ -1,6 +1,6 @@
 {
   "name": "docker-wp-vite",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Wordpress theme development using vite and docker.",
   "scripts": {
     "dev": "npm run version && npm run ip && vite --host",
