@@ -42,19 +42,28 @@
 
 ## npmスクリプト
 
-| コマンド            | 用途                      | 備考 |
-|:----------------|:------------------------|:---|
-| `dev`           | 開発環境起動                  |    |
-| `build`         | ビルドデータ生成                |    |
-| `wp:initialize` | WordPressの初期設定バッチ実行     |
-| `wp:update`     | WordPressのプラグイン等導入バッチ実行 |    |
+* 触る必要があるものだけ抜粋
+
+| コマンド               | 用途                      | 備考                                |
+|:-------------------|:------------------------|:----------------------------------|
+| `dev`              | 開発環境起動                  |                                   |
+| `build:develop`    | ビルドデータ生成                |                                   |
+| `build:production` | 本番環境用ビルドデータ生成           |                                   |
+| `docker:up`        | Docker立ち上げ              | `docker compose up -d`            |
+| `docker:down`      | Docker停止                | `docker compose down`             |
+| `docker:build`     | Dockerイメージ再構築           | `docker compose build --no-cache` |
+| `deploy:develop`   | 開発環境へビルドデータをデプロイする      |                                   |
+| `error_log` | エラーログのウォッチ|
+| `wp:initialize`    | WordPressの初期設定バッチ実行     |
+| `wp:update`        | WordPressのプラグイン等導入バッチ実行 |                                   |
 
 ## 開発フロー
 
 * （初回のみ）`npm i`
 * （初回のみ）`husky install`
 * （初回のみ）`husky add .husky/pre-commit "npx lint-staged"`
-* `docker compose up -d`
+* （初回のみ）`.env.example`を`.env`として複製し、`WORDPRESS-THEME`を指定
+* `docker compose up -d` / `npm run docker:up`
 * （初回のみ）`npm run wp:initialize`
 * プラグインの導入等を都度`npm run wp:update`で実施
 * `npm run dev`
@@ -77,7 +86,7 @@
 
 ### TODO
 
-* 各所でハードコーディングしている`my-theme`の撲滅
+* ~~各所でハードコーディングしている`my-theme`の撲滅~~
 * テーマファイル用の汎用関数郡実装
 * 重複マウントしている箇所をコンテナ内シンボリックするように変更
 
