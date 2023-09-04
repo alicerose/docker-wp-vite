@@ -58,24 +58,22 @@ services:
           propagation: shared
       - type: bind
         source: src/templates
-        target: /var/www/html/wp-content/themes/my-theme
+        target: "/var/www/html/wp-content/themes/${WORDPRESS_THEME}"
         bind:
           create_host_path: true
           propagation: shared
       - type: bind
         source: src/assets
-        target: /var/www/html/wp-content/themes/my-theme/assets
+        target: "/var/www/html/wp-content/themes/${WORDPRESS_THEME}/assets"
         bind:
           create_host_path: true
           propagation: slave
-      # @todo create and replace to symbolic link batch in container volume
       - type: bind
         source: src/assets
-        target: /var/www/html/wp-content/themes/my-theme/src/assets
+        target: "/var/www/html/wp-content/themes/${WORDPRESS_THEME}/src/assets"
         bind:
           create_host_path: true
           propagation: slave
-
 
   phpmyadmin:
     image: arm64v8/phpmyadmin

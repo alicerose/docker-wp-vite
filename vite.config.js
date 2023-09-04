@@ -17,6 +17,8 @@ import autoprefixer from 'autoprefixer';
 import VitePluginBrowserSync from 'vite-plugin-browser-sync';
 import ip from 'ip';
 
+const THEME_NAME = process.env.WORDPRESS_THEME ?? 'my-theme';
+
 // https://vitejs.dev/config
 export default defineConfig({
 
@@ -34,7 +36,7 @@ export default defineConfig({
 
     // config
     root      : '',
-    base      : '/wp-content/themes/my-theme/',
+    base      : `/wp-content/themes/${THEME_NAME}/`,
     publicDir : 'src/templates',
 
     css: {

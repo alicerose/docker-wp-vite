@@ -4,10 +4,6 @@ echo "[WP-CLI] Exec update commands."
 
 if wp core is-installed; then
 
-  # テーマ切り替え
-  echo "[WP-CLI] Switch themes."
-  wp theme activate "${WP_THEME}"
-
   # プラグインの追加
   echo "[WP-CLI] Add plugins."
   wp plugin install \
