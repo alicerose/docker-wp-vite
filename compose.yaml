@@ -75,7 +75,6 @@ services:
           create_host_path: true
           propagation: slave
 
-
   phpmyadmin:
     image: arm64v8/phpmyadmin
     depends_on:
